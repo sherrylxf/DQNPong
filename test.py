@@ -5,7 +5,7 @@ from pong_env import Pong
 from deep_q_network import DeepQNetwork
 
 
-def test(model_path="models/pong_model_final.pth", render=True):
+def test(model_path="models/pong_model_final.pth", render=True):# 更改model_path，选择不同的模型权重
     pygame.init()
 
     # 创建窗口用于显示
