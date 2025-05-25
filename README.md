@@ -11,7 +11,6 @@
 ## 项目结构
 
 ```
-
 pong\_dqn\_project/
 ├── pong\_env.py              # Pong 游戏环境（基于 Pygame）
 ├── deep\_q\_network.py       # DQN 网络模型结构
@@ -21,10 +20,37 @@ pong\_dqn\_project/
 ├── runs/                     # 训练日志和 TensorBoard 曲线
 └── README.md                 # 项目说明文档
 ````
+---
+## 环境搭建
 
+1. 安装 [Anaconda](https://www.anaconda.com)，设置 Anaconda 环境变量，并在命令提示符输入 `conda --version` 查看版本信息
+
+2. 创建 Reinforcement Learning conda 环境，Python 版本 3.9.19
+
+   ```bash
+   conda create -n rl python==3.9.19
+   ```
+
+3. 激活 Reinforcement Learning conda 环境
+
+   ```bash
+   conda activate rl
+   ```
+
+4. 安装相关依赖
+
+    ```bash
+    conda install numpy \
+        torch \
+        gymnasium[box2d] \
+        tqdm \
+        tensorboard \
+        tensorboardX
+    ```
 ---
 
-## 环境配置（推荐使用 Anaconda）
+
+## 项目配置（推荐使用 Anaconda）
 
 ### 1. 创建并激活环境
 
