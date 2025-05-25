@@ -141,8 +141,6 @@ def train():
 
         if 'loss' in locals():
             loss_history.append(loss.item())
-            print(
-                f"Epoch {epoch} | Reward: {total_reward} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.3f} | Mean Q: {mean_q:.2f}")
             writer.add_scalar("Loss", loss.item(), epoch)
         else:
             loss_history.append(0.0)
