@@ -139,7 +139,18 @@ python test.py
 
 ## 训练结果
 
-> 在2000轮训练后，奖励曲线（reward）、损失变化（loss）、变化探索率（epsilon）：
+
+> 在 第1-1000 轮训练后，奖励曲线（reward）、损失变化（loss）、变化探索率（epsilon）：
+
+![reward_curve.png](src/reward_curve.png)
+* 起伏较大，整体略有上升趋势。表明策略初期探索较多、学习不稳定。
+![loss_curve.png](src/loss_curve.png)
+* 从高到低震荡收敛，学习率较快衰减。表示模型开始学习基本策略。
+![epsilon_curve.png](src/epsilon_curve.png)
+* 从1.0 衰减至 0.01，模型逐渐从探索过渡到利用。
+
+
+> 在 第1001-2000 轮训练后，奖励曲线（reward）、损失变化（loss）、变化探索率（epsilon）：
 
 ![img.png](src/img.png)
 * 奖励曲线波动显著减小，整体稳定上升，智能体策略更加成熟。
