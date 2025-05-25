@@ -13,10 +13,17 @@ import pygame
 from pong_env import Pong
 from deep_q_network import DeepQNetwork
 
-# ---- 参数配置 ----
-resume = True                  # 是否继续训练
-start_epoch = 1001 if resume else 1
-end_epoch = 2000              # 总训练轮次
+# ---- 参数配置 ---
+# 1-1000轮训练
+resume = False               # 不使用断点续训
+start_epoch = 1             # 从第1轮开始
+end_epoch = 1000            # 到第1000轮结束
+
+# 1001-2000轮训练
+#resume = True                  # 是否继续训练
+#start_epoch = 1001 if resume else 1
+#end_epoch = 2000              # 总训练轮次`
+
 load_model_path = f"models/pong_model_{start_epoch - 1}.pth" if resume else None
 metrics_excel_path = "metrics.xlsx"
 
@@ -129,9 +136,17 @@ def train():
             mean_q = model(state.unsqueeze(0)).mean().item()
 
         rewards_history.append(total_reward)
-        loss_history.append(loss.item())
         epsilon_history.append(epsilon)
         q_value_history.append(mean_q)
+
+        if 'loss' in locals():
+            loss_history.append(loss.item())
+            print(
+                f"Epoch {epoch} | Reward: {total_reward} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.3f} | Mean Q: {mean_q:.2f}")
+            writer.add_scalar("Loss", loss.item(), epoch)
+        else:
+            loss_history.append(0.0)
+            print(f"Epoch {epoch} | Reward: {total_reward} | Loss: N/A | Epsilon: {epsilon:.3f} | Mean Q: {mean_q:.2f}")
 
         print(f"Epoch {epoch} | Reward: {total_reward} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.3f} | Mean Q: {mean_q:.2f}")
 
@@ -142,7 +157,7 @@ def train():
         writer.add_scalar("Mean_Q", mean_q, epoch)
 
         # ---- 保存模型 ----
-        if epoch % 100 == 0:
+        if epoch % 1 == 0:
             torch.save(model.state_dict(), f"models/pong_model_{epoch}.pth")
 
     # 保存最终模型
